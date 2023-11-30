@@ -117,7 +117,22 @@ main {
     color: var(--info-text-color);
 }
 
-.info a {
+.info a,
+.buttons a {
     text-decoration: none;
     color: var(--info-text-color);
+}
+
+.buttons {
+    padding-block: 1rem;
+    background: var(--bg-tasks);
+    border-radius: 0.3125rem;
+
+    margin-top: 1rem;
+    
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+
+    font-size: 0.875rem;
 }
