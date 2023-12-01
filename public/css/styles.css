@@ -32,7 +32,12 @@ header {
     padding: 3rem 1.75rem 0;
 }
 
-header div {
+header > div {
+    max-width: 33.75rem;
+    margin-inline: auto;
+}
+
+header div div {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -79,6 +84,9 @@ main {
     box-shadow: var(--box-shadow);
     border-radius: 0.3125rem;
     margin-top: -1rem;
+
+    max-width: 33.75rem;
+    margin-inline: auto;
 }
 
 .tasks .task {
@@ -123,16 +131,47 @@ main {
     color: var(--info-text-color);
 }
 
+.info .buttons {
+    display: none;
+}
+
 .buttons {
     padding-block: 1rem;
     background: var(--bg-tasks);
     border-radius: 0.3125rem;
-
     margin-top: 1rem;
+    max-width: 33.75rem;
+    margin-inline: auto;
     
     display: flex;
     justify-content: center;
     gap: 1.2rem;
 
     font-size: 0.875rem;
+}
+
+@media(min-width: 1000px){
+    section.buttons {
+        display: none;
+    }
+
+    .info .buttons {
+        display: flex;
+        padding: 0;
+        margin: 0;
+    }
+
+    .task button {
+        visibility: hidden;
+    }
+
+    .task button:hover,
+    .task input:hover,
+    .task label:hover {
+        cursor: pointer;
+    }
+
+    .task:hover button {
+        visibility: initial;
+    }
 }
