@@ -21,6 +21,15 @@ function descompletarTarefa(id){
 
     window.location.reload()
 }
+function excluirTarefa(id){
+    fetch("http://localhost:3000/delete", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id })
+    })
+}
 
 function changeTheme() {
     const theme = localStorage.getItem("theme")

@@ -17,6 +17,22 @@ app.use(express.urlencoded({
 }))
 
 /// Rotas
+app.post('/delete', (req, res) => {
+    const id = req.body.id
+
+    const sql = `
+        DELETE FROM tarefas
+        WHERE id = ${id}
+    `
+
+    conexao.query(sql, (error) => {
+        return console.log(error)
+    })
+
+    res.redirect('/')
+})
+
+
 app.post('/complete', (req, res) => {
     const id = req.body.id
 
