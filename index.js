@@ -9,6 +9,30 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
 
+/// Converter dados do formulario em objeto em JS
+app.use(express.urlencoded({
+    extended: true
+}))
+
+/// Rotas
+app.post('/create', (req, res) => {
+    const description = req.body.description
+    const complete = 0
+    
+    const sql = `
+        INSERT INTO tarefas(descricao, completa)
+        VALUES ('${description}', '${complete}')
+    `
+
+    conn.query(sql, (error) => {
+        if (error) {
+            return console.log(error)
+        }
+
+        res.redirect('/')
+    })
+})
+
 app.get('/', (req, res) => {
     res.render('home')
 })
