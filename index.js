@@ -15,13 +15,29 @@ app.use(express.urlencoded({
 }))
 
 /// Rotas
+app.post('/complete', (req, res) => {
+    const id = req.body.id
+
+    const sql = `
+        UPDATE tarefas
+        SET completa = '1'
+        WHERE id = ${id}
+    `
+
+    conn.query(sql, (error) => {
+        return console.log(error)
+    })
+
+    res.redirect('/')
+})
+
 app.post('/create', (req, res) => {
-    const description = req.body.description
-    const complete = 0
+    const descricao = req.body.descricao
+    const completa = 0
     
     const sql = `
         INSERT INTO tarefas(descricao, completa)
-        VALUES ('${description}', '${complete}')
+        VALUES ('${descricao}', '${completa}')
     `
 
     conn.query(sql, (error) => {
@@ -42,10 +58,10 @@ app.get('/', (req, res) => {
         }
 
         const tarefas = dados.map((dado) => {
-            return{
+            return {
                 id: dado.id,
-                description: dado.description,
-                complete: dado.complete === 0 ? false : true
+                descricao: dado.descricao,
+                completa: dado.completa === 0 ? false : true
             }
         })
 
