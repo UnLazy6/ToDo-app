@@ -36,14 +36,12 @@ app.post('/create', (req, res) => {
 app.get('/', (req, res) => {
     const sql = 'SELECT * FROM tarefas'
 
-    conn.query(sql, (error, data) => {
+    conn.query(sql, (error, dados) => {
         if (error) {
             return console.log(error)
         }
-        
-        console.log(data)
 
-        const tasks = data.map((dado) =>{
+        const tarefas = dados.map((dado) => {
             return{
                 id: dado.id,
                 description: dado.description,
@@ -51,10 +49,8 @@ app.get('/', (req, res) => {
             }
         })
 
-        console.log(tasks)
+        res.render('home', { tarefas })
     })
-
-    res.render('home')
 })
 
 const conn = mysql.createConnection({

@@ -1,38 +1,18 @@
 <main>
     <section class="tasks">
-        <div class="task">
-            <form action="">
-                <div>
-                    <input type="radio" id="task-1">
-                    <label for="task-1">Completar Curso</label>
-                </div>
-                <button>
-                    <img src="/imagens/x-icon.png" alt="icone para excluir tarefa">
-                </button>
-            </form>
-        </div>
-        <div class="task">
-            <form action="">
-                <div>
-                    <input type="radio" id="task-1">
-                    <label for="task-1">Completar Curso</label>
-                </div>
-                <button>
-                    <img src="/imagens/x-icon.png" alt="icone para excluir tarefa">
-                </button>
-            </form>
-        </div>
-        <div class="task">
-            <form action="">
-                <div>
-                    <input type="radio" id="task-1">
-                    <label for="task-1">Completar Curso</label>
-                </div>
-                <button>
-                    <img src="/imagens/x-icon.png" alt="icone para excluir tarefa">
-                </button>
-            </form>
-        </div>
+        {{#each tarefas}}
+            <div class="task">
+                <form action="">
+                    <div>
+                        <input type="checkbox" id="task-{{this.id}}">
+                        <label for="task-{{this.id}}">{{this.description}}</label>
+                    </div>
+                    <button>
+                        <img src="/imagens/x-icon.png" alt="icone para excluir tarefa">
+                    </button>
+                </form>
+            </div>
+        {{/each}}
         <div class="info">
             <p>5 active tasks</p>
 
