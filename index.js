@@ -34,6 +34,26 @@ app.post('/create', (req, res) => {
 })
 
 app.get('/', (req, res) => {
+    const sql = 'SELECT * FROM tarefas'
+
+    conn.query(sql, (error, data) => {
+        if (error) {
+            return console.log(error)
+        }
+        
+        console.log(data)
+
+        const tasks = data.map((dado) =>{
+            return{
+                id: dado.id,
+                description: dado.description,
+                complete: dado.complete === 0 ? false : true
+            }
+        })
+
+        console.log(tasks)
+    })
+
     res.render('home')
 })
 
