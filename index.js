@@ -21,7 +21,23 @@ app.post('/complete', (req, res) => {
     const sql = `
         UPDATE tarefas
         SET completa = '1'
-        WHERE id = ${id}
+        WHERE id = '${id}'
+    `
+
+    conn.query(sql, (error) => {
+        return console.log(error)
+    })
+
+    res.redirect('/')
+})
+
+app.post('/uncomplete', (req, res) => {
+    const id = req.body.id
+
+    const sql = `
+        UPDATE tarefas
+        SET completa = '1'
+        WHERE id = '${id}'
     `
 
     conn.query(sql, (error) => {
@@ -65,7 +81,13 @@ app.get('/', (req, res) => {
             }
         })
 
-        res.render('home', { tarefas })
+        const tarefasAtivas = tarefas.filter((tarefa) => {
+            return tarefa.completa === false && tarefa
+        })
+
+        const quantidadeTarefasAtivas = tarefasAtivas.length
+
+        res.render('home', { tarefas, quantidadeTarefasAtivas })
     })
 })
 
