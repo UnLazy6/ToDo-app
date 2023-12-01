@@ -9,6 +9,8 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
 
+app.use(express.json())
+
 /// Converter dados do formulario em objeto em JS
 app.use(express.urlencoded({
     extended: true
@@ -21,10 +23,10 @@ app.post('/complete', (req, res) => {
     const sql = `
         UPDATE tarefas
         SET completa = '1'
-        WHERE id = '${id}'
+        WHERE id = ${id}
     `
 
-    conn.query(sql, (error) => {
+    conexao.query(sql, (error) => {
         return console.log(error)
     })
 
@@ -36,11 +38,11 @@ app.post('/uncomplete', (req, res) => {
 
     const sql = `
         UPDATE tarefas
-        SET completa = '1'
-        WHERE id = '${id}'
+        SET completa = '0'
+        WHERE id = ${id}
     `
 
-    conn.query(sql, (error) => {
+    conexao.query(sql, (error) => {
         return console.log(error)
     })
 
@@ -56,7 +58,7 @@ app.post('/create', (req, res) => {
         VALUES ('${descricao}', '${completa}')
     `
 
-    conn.query(sql, (error) => {
+    conexao.query(sql, (error) => {
         if (error) {
             return console.log(error)
         }
@@ -65,10 +67,14 @@ app.post('/create', (req, res) => {
     })
 })
 
+app.get('/ativas', (req, res) => {
+    
+})
+
 app.get('/', (req, res) => {
     const sql = 'SELECT * FROM tarefas'
 
-    conn.query(sql, (error, dados) => {
+    conexao.query(sql, (error, dados) => {
         if (error) {
             return console.log(error)
         }
@@ -91,7 +97,7 @@ app.get('/', (req, res) => {
     })
 })
 
-const conn = mysql.createConnection({
+const conexao = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "root",
@@ -99,7 +105,7 @@ const conn = mysql.createConnection({
     port: 3306
 })
 
-conn.connect((error) => {
+conexao.connect((error) => {
     if (error) {
         return console.log(error)
     }
